@@ -2,9 +2,9 @@ use Mix.Config
 
 # Configure your database
 config :chat, Chat.Repo,
-  username: "abry",
-  password: "root",
-  database: "dev_phx_chat",
+  username: System.get_env("DB_USERNAME", "default"),
+  password: System.get_env("DB_PASSWORD"),
+  database: System.get_env("DB_DATABASE"),
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10

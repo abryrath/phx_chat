@@ -1,20 +1,33 @@
-import * as React from 'react';
+import React from 'react';
+import Chat from './chat';
 
 interface AppProps {
-  defaultRoom: string,
- }
+  defaultRoom: string;
+  type: any;
+  key: any;
+}
+
+declare global {
+  interface Window {
+    [key: string]: string;
+  }
+}
 
 const App: React.FunctionComponentElement<AppProps> = (props: AppProps) => {
+  const { defaultRoom } = props;
+  const [userToken, setUserToken] = React.useState('');
+
+  React.useEffect(() => {
+      setUserToken(window.userToken || '');
+  }, []);
+
   return (
     <div>
       <h1>Chat</h1>
-      <p>Default Room: {props.defaultRoom}</p>
+      <p>Default Room: {defaultRoom}</p>
+      <Chat userToken={userToken}/>
     </div>
   );
 };
-
-App.defaultProps = {
-  defaultRoom: 'lobby'
-}
 
 export default App;

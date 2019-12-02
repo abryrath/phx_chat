@@ -6,6 +6,7 @@ defmodule Chat.Application do
   use Application
 
   def start(_type, _args) do
+    Confex.resolve_env!(:phx_chat)
     # List all child processes to be supervised
     children = [
       # Start the Ecto repository

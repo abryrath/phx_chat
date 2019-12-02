@@ -1,11 +1,11 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 // We need to import the CSS so that webpack will load it.
 // The MiniCssExtractPlugin is used to separate it out into
 // its own CSS file.
 // import css from "../css/app.css"
 
-import * as App from './components/app';
+import App from './components/app';
 
 // webpack automatically bundles all modules in your
 // entry points. Those entry points can be configured
@@ -22,5 +22,5 @@ import "phoenix_html"
 
 const root = document.querySelector('#root');
 if (root) {
-    ReactDOM.render(<App/>, root);
+    ReactDOM.render(<App defaultRoom="lobby"/>, root);
 }

@@ -1,6 +1,16 @@
 defmodule ChatWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :chat
 
+  def init(_type, config) do
+    {:ok, config} = Confex.Resolver.resolve(config)
+
+    unless config[:secret_key_base] do
+      raise "Set SECRET_KEY env var"
+    end
+
+    {:ok, config}
+  end
+
   socket "/socket", ChatWeb.UserSocket,
     websocket: true,
     longpoll: false
