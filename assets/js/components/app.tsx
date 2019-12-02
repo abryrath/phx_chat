@@ -25,7 +25,7 @@ const App: React.FunctionComponentElement<AppProps> = (props: AppProps) => {
     <div>
       <h1>Chat</h1>
       <p>Default Room: {defaultRoom}</p>
-      <Chat userToken={userToken}/>
+      <Chat userToken={userToken} room={defaultRoom}/>
     </div>
   );
 };
