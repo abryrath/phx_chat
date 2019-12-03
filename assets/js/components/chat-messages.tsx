@@ -4,7 +4,7 @@ interface ChatMessagesProps {
   messages: string[];
 }
 
-const ChatMessages: React.FunctionComponent<ChatMessagesProps> = props => {
+const ChatMessages: React.FunctionComponentElement<ChatMessagesProps> = props => {
   const { messages } = props;
 
 //   if (messages.length < 1) {
@@ -12,7 +12,7 @@ const ChatMessages: React.FunctionComponent<ChatMessagesProps> = props => {
 //   }
   return (
     <div>
-      {messages.map((msg: string, i: number) => (
+      {messages.map((msg: string, i: Number) => (
         <div key={i}>{msg}</div>
       ))}
       {JSON.stringify(messages, null, 2)}

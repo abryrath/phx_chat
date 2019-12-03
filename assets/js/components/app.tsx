@@ -22,9 +22,9 @@ const App: React.FunctionComponentElement<AppProps> = (props: AppProps) => {
   }, []);
 
   return (
-    <div>
-      <h1>Chat</h1>
-      <p>Default Room: {defaultRoom}</p>
+    <div className="w-full m-12">
+      <h1 className="text-3xl">Chat</h1>
+      <p className="text-lg">Default Room: {defaultRoom}</p>
       <Chat userToken={userToken} room={defaultRoom}/>
     </div>
   );

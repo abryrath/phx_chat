@@ -20,16 +20,17 @@ const Chat: React.FunctionComponentElement<ChatProps> = (props: ChatProps) => {
 
   const newMessageListener = async ({ body }: IMessage) => {
     console.log('message received', body);
-    const m = messages || [];
-    m.push(body);
+    const m = [body, ...messages];
+    // m.push(body);
     console.log(m);
     setMessages(m);
   };
 
   const pingListener = async () => {
     console.log('ping received');
-    const m = messages || [];
-    m.push(`[PING]`);
+    const m = ['[PING]', ...messages];
+    console.log(m);
+    // m.push(`[PING]`);
     setMessages(m);
   };
 
