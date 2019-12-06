@@ -9,9 +9,6 @@
   </head>
   <body class="bg-blue-400">
   <div class="container flex flex-col items-center">
-    <div id="root"></div>
-    </div>
-    <script>window.userToken = "<%= assigns[:user_token] %>";</script>
-    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <%= render @view_module, @view_template, assigns %>
   </body>
 </html>
