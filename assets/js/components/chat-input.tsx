@@ -1,10 +1,11 @@
 import React from 'react';
+import Store from '../store';
 
 interface ChatInputProps {
   channel: Channel;
 }
 
-const ChatInput: React.FunctionComponent<ChatInputProps> = props => {
+const ChatInput: React.FC<ChatInputProps> = props => {
   const { channel } = props;
 
   const textInput: React.RefObject<HTMLTextAreaElement> = React.createRef();
@@ -39,18 +40,30 @@ const ChatInput: React.FunctionComponent<ChatInputProps> = props => {
   }, []);
 
   return (
-    <div>
-      <textarea ref={textInput} onKeyUp={updateSendButton} className="border rounded font-gray-800" resizable="false" style={{ resize: 'none' }}/>
-      <button
-        onClick={send}
-        onFocus={updateSendButton}
-        onBlur={updateSendButton}
-        ref={sendButton}
-      >
-        Send
-      </button>
-      <button onClick={ping}>Ping</button>
-    </div>
+    // <Store.Consumer>
+    //   {() => (
+        <div className="m-2 p-2 bg-white flex ">
+          <textarea
+            ref={textInput}
+            onKeyUp={updateSendButton}
+            className="border rounded font-gray-800"
+            style={{ resize: 'none' }}
+          />
+          <button
+            onClick={send}
+            onFocus={updateSendButton}
+            onBlur={updateSendButton}
+            ref={sendButton}
+            className="rounded bg-white m-2 p-2"
+          >
+            Send
+          </button>
+          <button onClick={ping} className="rounded bg-white m-2 p-2">
+            Ping
+          </button>
+        </div>
+    //   )}
+    // </Store.Consumer>
   );
 };
 

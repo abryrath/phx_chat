@@ -12,26 +12,31 @@ interface IMessage {
   body: string;
 }
 
-const Chat: React.FunctionComponentElement<ChatProps> = (props: ChatProps) => {
+const Chat: React.FC<ChatProps> = (props: ChatProps) => {
   const { userToken, room } = props;
   const [socket, setSocket] = React.useState(undefined);
   const [channel, setChannel] = React.useState(undefined);
-  const [messages, setMessages] = React.useState(['Welcome']);
+  const [messages, setMessages] = React.useState([]);
+  const messagesRef = React.useRef<string[]>([]);
+  //   const messages =
+  //   const [messages, setMessages] = React.useState([]);
 
   const newMessageListener = async ({ body }: IMessage) => {
     console.log('message received', body);
-    const m = [body, ...messages];
-    // m.push(body);
-    console.log(m);
-    setMessages(m);
+    setMessages([body, ...messagesRef.current]);
   };
 
+  React.useEffect(() => {
+    messagesRef.current = messages;
+  }, [messages]);
   const pingListener = async () => {
     console.log('ping received');
-    const m = ['[PING]', ...messages];
-    console.log(m);
+    // chat.push('PING');
+    // messages.add('PING');
+    // const m = ['[PING]', ...messages];
+    // console.log(m);
     // m.push(`[PING]`);
-    setMessages(m);
+    // setMessages(m);
   };
 
   React.useEffect(() => {
@@ -52,7 +57,7 @@ const Chat: React.FunctionComponentElement<ChatProps> = (props: ChatProps) => {
 
   React.useEffect(() => {
     if (!channel) {
-      console.log('channel is undefined');
+      //   console.log('channel is undefined');
       return;
     }
     console.log('channel is defined');

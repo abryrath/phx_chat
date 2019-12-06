@@ -6,7 +6,8 @@
     "module": "commonjs",
     "target": "es6",
     "jsx": "react",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "experimentalDecorators": true
   },
   "include": [
     "./js/**/*"

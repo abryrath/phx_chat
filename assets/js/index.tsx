@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import "../css/app.css"
 
 import App from './components/app';
+import ChatStore from './store';
 
 // webpack automatically bundles all modules in your
 // entry points. Those entry points can be configured
@@ -20,6 +21,7 @@ import "phoenix_html"
 // Local files can be imported directly using relative paths, for example:
 // import socket from "./socket"
 
+// const store = new ChatStore();
 const root = document.querySelector('#root');
 if (root) {
     ReactDOM.render(<App defaultRoom="lobby"/>, root);
