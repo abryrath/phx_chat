@@ -25,7 +25,7 @@ const App: React.FC<AppProps> = (props: AppProps) => {
     <div className="w-full m-12">
       <h1 className="text-3xl">Chat</h1>
       <p className="text-lg">Default Room: {defaultRoom}</p>
-
+      <p>userToken: {userToken}</p>
       <Chat
         userToken={userToken}
         room={defaultRoom}

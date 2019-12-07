@@ -15,31 +15,41 @@ interface IMessage {
 const Chat: React.FC<ChatProps> = (props: ChatProps) => {
   const { userToken, room } = props;
   const [socket, setSocket] = React.useState(undefined);
+  const [connected, setConnected] = React.useState(false);
   const [channel, setChannel] = React.useState(undefined);
   const [messages, setMessages] = React.useState([]);
   const messagesRef = React.useRef<string[]>([]);
   //   const messages =
   //   const [messages, setMessages] = React.useState([]);
 
-  const newMessageListener = async ({ body }: IMessage) => {
-    console.log('message received', body);
+  const newMessageListener = async ({ body, email }: IMessage) => {
+    console.log(`message received from ${email}`, body);
     setMessages([body, ...messagesRef.current]);
   };
+
+  
+
+  const pingListener = async ({ body, email }) => {
+    console.log('ping received', email);
+    setMessages(['[PING]', ...messagesRef.current]);
+  };
+
+  const joinListener = async ({ email, room_id }) => {
+      console.log('new join', email);
+      setMessages([`[User joined: ${email}, room: ${room_id}]`, ...messagesRef.current]);
+  }
+
+  // Effects 
 
   React.useEffect(() => {
     messagesRef.current = messages;
   }, [messages]);
-  const pingListener = async () => {
-    console.log('ping received');
-    // chat.push('PING');
-    // messages.add('PING');
-    // const m = ['[PING]', ...messages];
-    // console.log(m);
-    // m.push(`[PING]`);
-    // setMessages(m);
-  };
 
   React.useEffect(() => {
+      setConnected(false);
+    if (!userToken) {
+        return;
+    }
     const s: Socket = new Socket('/socket', {
       params: {
         token: userToken,
@@ -53,7 +63,8 @@ const Chat: React.FC<ChatProps> = (props: ChatProps) => {
       .receive('ok', resp => console.log('Joined', resp))
       .receive('error', resp => console.error('error joining', resp));
     setChannel(c);
-  }, []);
+    setConnected(true);
+  }, [userToken]);
 
   React.useEffect(() => {
     if (!channel) {
@@ -63,11 +74,12 @@ const Chat: React.FC<ChatProps> = (props: ChatProps) => {
     console.log('channel is defined');
     channel.on('new_msg', newMessageListener);
     channel.on('ping', pingListener);
+    channel.on('after_join', joinListener);
   }, [channel]);
 
   return (
     <div>
-      <ChatMessages messages={messages} />
+      {connected ? (<ChatMessages messages={messages} />) : 'Connecting...'}
       <ChatInput channel={channel} />
     </div>
   );
