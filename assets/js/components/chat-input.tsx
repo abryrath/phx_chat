@@ -40,25 +40,27 @@ const ChatInput: React.FC<ChatInputProps> = props => {
   }, []);
 
   return (
-    <div className="m-2 p-2 bg-white flex self-end">
+    <div className="m-2 p-2 bg-white flex self-end w-full">
       <textarea
         ref={textInput}
         onKeyUp={updateSendButton}
-        className="border rounded font-gray-800"
+        className="border rounded font-gray-800 w-2/3 text-md border rouonded px-3 py-2"
         style={{ resize: 'none' }}
       />
-      <button
-        onClick={send}
-        onFocus={updateSendButton}
-        onBlur={updateSendButton}
-        ref={sendButton}
-        className="rounded bg-white m-2 p-2 diabled:bg-black"
-      >
-        Send
-      </button>
-      <button onClick={ping} className="rounded bg-white m-2 p-2">
-        Ping
-      </button>
+      <div className="w-1/3">
+        <button
+          onClick={send}
+          onFocus={updateSendButton}
+          onBlur={updateSendButton}
+          ref={sendButton}
+          className="rounded bg-white m-2 p-2 diabled:bg-black"
+        >
+          Send
+        </button>
+        <button onClick={ping} className="rounded bg-white m-2 p-2">
+          Ping
+        </button>
+      </div>
     </div>
   );
 };

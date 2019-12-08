@@ -2,6 +2,8 @@ import React from 'react';
 import { Socket, Channel } from 'phoenix';
 import ChatInput from './chat-input';
 import ChatMessages from './chat-messages';
+import DisplayMessage from '../models/display-message';
+
 
 interface ChatProps {
   userToken: string;
@@ -23,20 +25,32 @@ const Chat: React.FC<ChatProps> = (props: ChatProps) => {
   //   const [messages, setMessages] = React.useState([]);
 
   const newMessageListener = async ({ body, email }: IMessage) => {
+    const message = new DisplayMessage();
+    message.sender =  email;
+    message.message = body;
+    message.self = true;
+
+    //`<span class="font-bold mr-2">${email}</span> ${body}`;
     console.log(`message received from ${email}`, body);
-    setMessages([body, ...messagesRef.current]);
+    setMessages([message, ...messagesRef.current]);
   };
 
-  
-
   const pingListener = async ({ body, email }) => {
-    console.log('ping received', email);
-    setMessages(['[PING]', ...messagesRef.current]);
+    // console.log('ping received', email);
+    const message = new DisplayMessage();
+    message.sender = email;
+    message.message =  'PING'
+    message.self = false;
+    setMessages([message, ...messagesRef.current]);
   };
 
   const joinListener = async ({ email, room_id }) => {
       console.log('new join', email);
-      setMessages([`[User joined: ${email}, room: ${room_id}]`, ...messagesRef.current]);
+      const message = new  DisplayMessage();
+      message.sender = email;
+      message.message = 'Joined';
+      message.self = false;
+      setMessages([message, ...messagesRef.current]);
   }
 
   // Effects 
@@ -77,7 +91,7 @@ const Chat: React.FC<ChatProps> = (props: ChatProps) => {
   }, [channel]);
 
   return (
-    <div className="flex flex-row flex-wrap items-center justify-center h-full relative">
+    <div className="flex flex-row flex-wrap items-center justify-center h-full relative bg-gray-200">
       {connected ? (<ChatMessages messages={messages} />) : 'Connecting...'}
       <ChatInput channel={channel} />
     </div>

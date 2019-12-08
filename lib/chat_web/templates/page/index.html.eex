@@ -1,5 +1,5 @@
 <!-- page/index.html.eex -->
-<div id="root" class="w-full"></div>
+<div id="root" class="w-full h-full"></div>
 <script>
 window.userToken = "<%= assigns[:user_token] %>";
 </script>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Chat from './chat';
+import NavLink from './nav-link';
 
 interface AppProps {
   defaultRoom: string;
@@ -16,8 +17,6 @@ const App: React.FC<AppProps> = (props: AppProps) => {
   const { defaultRoom } = props;
   const [userToken, setUserToken] = React.useState('');
 
-  const logoutRef = React.createRef<HTMLLinkElement>();
-
   const logout = () => {
     window
       .fetch('/session', {
@@ -33,29 +32,21 @@ const App: React.FC<AppProps> = (props: AppProps) => {
 
   React.useEffect(() => {
     setUserToken(window.userToken || '');
-    logoutRef.current.addEventListener('click', logout);
+    // logoutRef.current.addEventListener('click', logout);
   }, []);
 
   return (
-    <div className="w-full m-12">
-      <nav className="absolute mt-3 mr-2 top-0 left-0 flex w-screen">
-          <div className="flex flex-row">
-              <div><a href="/">Github </a></div>
-          </div>
+    <div className="w-full h-full">
+      <nav className="absolute py-3 mb-3 pr-2 top-0 left-0 flex w-screen bg-gray-800">
+        <div className="flex flex-row">
+          <NavLink newWindow={true} href="https://github.com/abryrath/phx_chat">Source</NavLink>
+          <NavLink href="https://github.com/abryrath/phx_chat">About</NavLink>
+        </div>
         <div className="flex flex-row ml-auto">
-          <div>
-            <a href="/registration/edit" className="underline text-white mr-2">
-              Change Password
-            </a>
-          </div>
-          <div>
-            <a ref={logoutRef} className="underline text-white mr-2">
-              Logout
-            </a>
-          </div>
+          <NavLink href="/registration/edit">Change Password</NavLink>
+          <NavLink href="/">Logout</NavLink>
         </div>
       </nav>
-      <h1 className="text-3xl">Chat</h1>
       <Chat
         userToken={userToken}
         room={defaultRoom}

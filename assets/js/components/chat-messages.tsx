@@ -1,7 +1,8 @@
 import React from 'react';
+import { IDisplayMessage } from '../models/display-message';
 
 interface ChatMessagesProps {
-  messages: string[];
+  messages: IDisplayMessage[];
 }
 
 const ChatMessages: React.FC<ChatMessagesProps> = props => {
@@ -11,18 +12,15 @@ const ChatMessages: React.FC<ChatMessagesProps> = props => {
     return <div></div>;
   }
   return (
-    <div className="self-start w-full">
+    <div className="self-start w-full overflow-scroll">
       {messages &&
         messages.length &&
         messages
           .reverse()
           .filter((m, i) => i < 10)
-          .map((msg: string, i: number) => (
-            <div className="bg-gray-200 rounded m-2 p-2" key={i}>
-              {msg}
-            </div>
+          .map((msg: IDisplayMessage, i: number) => (
+            <div key={i} dangerouslySetInnerHTML={{ __html: msg.toHtml() }}></div>
           ))}
-      {/* {JSON.stringify(messages, null, 2)} */}
     </div>
   );
 };
