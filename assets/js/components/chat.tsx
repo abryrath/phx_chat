@@ -68,17 +68,16 @@ const Chat: React.FC<ChatProps> = (props: ChatProps) => {
 
   React.useEffect(() => {
     if (!channel) {
-      //   console.log('channel is undefined');
       return;
     }
-    console.log('channel is defined');
+
     channel.on('new_msg', newMessageListener);
     channel.on('ping', pingListener);
     channel.on('after_join', joinListener);
   }, [channel]);
 
   return (
-    <div>
+    <div className="flex flex-row flex-wrap items-center justify-center h-full relative">
       {connected ? (<ChatMessages messages={messages} />) : 'Connecting...'}
       <ChatInput channel={channel} />
     </div>

@@ -31,4 +31,5 @@ import_config "#{Mix.env()}.exs"
 
 config :chat, :pow,
   user: Chat.Users.User,
-  repo: Chat.Repo
+  repo: Chat.Repo,
+  web_module: ChatWeb

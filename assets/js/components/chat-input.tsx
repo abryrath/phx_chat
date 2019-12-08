@@ -1,5 +1,5 @@
 import React from 'react';
-import Store from '../store';
+import { Channel } from 'phoenix';
 
 interface ChatInputProps {
   channel: Channel;
@@ -13,11 +13,12 @@ const ChatInput: React.FC<ChatInputProps> = props => {
 
   const send = async () => {
     const body: string = textInput.current.value;
-    await channel.push('new_msg', {
+    channel.push('new_msg', {
       body,
     });
     textInput.current.value = '';
     textInput.current.focus();
+    updateSendButton();
   };
 
   const ping = async () => {
@@ -27,7 +28,6 @@ const ChatInput: React.FC<ChatInputProps> = props => {
   };
 
   const updateSendButton = () => {
-    // console.log(e);
     if (textInput.current.value !== '') {
       sendButton.current.disabled = false;
       return;
@@ -40,30 +40,26 @@ const ChatInput: React.FC<ChatInputProps> = props => {
   }, []);
 
   return (
-    // <Store.Consumer>
-    //   {() => (
-        <div className="m-2 p-2 bg-white flex ">
-          <textarea
-            ref={textInput}
-            onKeyUp={updateSendButton}
-            className="border rounded font-gray-800"
-            style={{ resize: 'none' }}
-          />
-          <button
-            onClick={send}
-            onFocus={updateSendButton}
-            onBlur={updateSendButton}
-            ref={sendButton}
-            className="rounded bg-white m-2 p-2"
-          >
-            Send
-          </button>
-          <button onClick={ping} className="rounded bg-white m-2 p-2">
-            Ping
-          </button>
-        </div>
-    //   )}
-    // </Store.Consumer>
+    <div className="m-2 p-2 bg-white flex self-end">
+      <textarea
+        ref={textInput}
+        onKeyUp={updateSendButton}
+        className="border rounded font-gray-800"
+        style={{ resize: 'none' }}
+      />
+      <button
+        onClick={send}
+        onFocus={updateSendButton}
+        onBlur={updateSendButton}
+        ref={sendButton}
+        className="rounded bg-white m-2 p-2 diabled:bg-black"
+      >
+        Send
+      </button>
+      <button onClick={ping} className="rounded bg-white m-2 p-2">
+        Ping
+      </button>
+    </div>
   );
 };
 
