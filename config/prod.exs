@@ -16,6 +16,14 @@ config :chat, ChatWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :chat, Chat.Repo,
+  username: System.get_env("DB_USERNAME", "default"),
+  password: System.get_env("DB_PASSWORD"),
+  database: System.get_env("DB_DATABASE"),
+  hostname: "localhost",
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
