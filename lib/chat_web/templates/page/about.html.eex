@@ -1,0 +1,72 @@
+<div class="flex flex-col items-start justify-start">
+  <h1 class="text-2xl mb-4">About This Project</h1>
+  <p class="mb-4">
+    This site is built using a combination of React 16.10 for the chat frontend
+    and Elixir/Phoenix for everything on the backend including authentication,
+    websockets, user registration, and more. It is a quick demo project and
+    should not be used in a production environment.
+  </p>
+
+  <h2 class="text-xl mb-4">Technology</h2>
+  <p class="mb-4">
+    The backend of the site is written in
+    <a
+      class="underline text-blue-400"
+      href="https://elixir-lang.org"
+      target="_blank"
+      >Elixir</a
+    >
+    and uses the
+    <a
+      class="underline text-blue-400"
+      href="https://phoenixframework.org"
+      target="_blank"
+      >Phoenix Framework</a
+    >. Elixir is built on top of the Erlang BEAM VM, well-known for its ability
+    to create concurrent and fault-tolerant systems.
+  </p>
+  <p class="mb-4">In addition to the Phoenix web framework, this project uses:
+    <ul class="list-disc ml-12 mb-4">
+        <li><a class="underline text-blue-400" href="https://github.com/danschultzer/pow" target="_blank">Pow</a> to handle user authentication</li>
+        <li><a class="underline text-blue-400" href="https://github.com/Nebo15/confex" target="_blank">ConfEx</a> for handling environment-based configuration, which allows me to setup the site easily on different servers</li>
+    </ul>
+  </p>
+  <p class="mb-4">
+      The frontend of the site is written in React + Typescript and uses the new Hooks API. The site is so simple that it currently does not require any larger state-management libraries like Redux or Mobx.
+  </p>
+  <p class="mb-4"> like to use Typescript when possible; especially coming from a backend mindset, it is usually beneficial to have strict typing and helpful error messaging. The Typescript configuration and Webpack configuration were handrolled for this project.
+  </p>
+
+  <h2 class="text-xl mb-4">Features to Add</h2>
+  <p class="mb-4">
+    This project was built to show proficiency in Elixir + Phoenix, as well as
+    React + Javascript. Some features that may be added in the future include:
+  </p>
+
+  <ul class="list-disc ml-12 mb-4 ">
+    <li>
+      User profiles - more than just an email/password. Options could include a
+      photo avatar, first/last name, and short bio.
+    </li>
+    <li>
+      Store messages in the database. Associate messages to each user and give
+      them the ability to see their chat history.
+    </li>
+    <li>
+      Add the ability to send images, files.
+    </li>
+    <li>
+      Add meta-commands using '\'. For example `\ping' sends a ping to everyone
+      in the room. Typing '\' would open an autocomplete UI with suggestions.
+    </li>
+  </ul>
+
+  <h2 class="text-xl mb-4">Source</h2>
+  <p class="mb-4">
+    <a
+      class="underline text-blue-400"
+      href="https://github.com/abryrath/phx_chat"
+      >View the source on Github</a
+    >
+  </p>
+</div>

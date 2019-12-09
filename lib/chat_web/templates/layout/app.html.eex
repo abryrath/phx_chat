@@ -7,8 +7,8 @@
     <title>Chat · Phoenix Framework</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
   </head>
-  <body class="bg-blue-400 flex  flex-col  items-center justify-center p-12 h-screen">
-  <div class="container flex flex-col items-center bg-white rounded h-full p-12">
+  <body class="bg-blue-400 flex  flex-col items-center justify-center p-12 h-screen">
+  <div class="container flex flex-col items-center bg-white rounded h-full p-12 overflow-scroll">
     <%= render @view_module, @view_template, assigns %>
   </body>
 </html>

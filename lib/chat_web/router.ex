@@ -32,6 +32,8 @@ defmodule ChatWeb.Router do
 
   scope "/" do
     pipe_through [:browser]
+    get "/about", ChatWeb.PageController, :about
+
     pow_routes()
   end
 

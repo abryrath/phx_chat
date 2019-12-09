@@ -1,5 +1,6 @@
 import React from 'react';
 import { Channel } from 'phoenix';
+import Button from './button';
 
 interface ChatInputProps {
   channel: Channel;
@@ -9,7 +10,9 @@ const ChatInput: React.FC<ChatInputProps> = props => {
   const { channel } = props;
 
   const textInput: React.RefObject<HTMLTextAreaElement> = React.createRef();
-  const sendButton: React.RefObject<HTMLButtonElement> = React.createRef();
+  const sendButton: React.RefObject<HTMLButtonElement> = React.createRef<
+    HTMLButtonElement
+  >();
 
   const send = async () => {
     const body: string = textInput.current.value;
@@ -48,18 +51,18 @@ const ChatInput: React.FC<ChatInputProps> = props => {
         style={{ resize: 'none' }}
       />
       <div className="w-1/3">
-        <button
+        <Button
           onClick={send}
           onFocus={updateSendButton}
           onBlur={updateSendButton}
           ref={sendButton}
-          className="rounded bg-white m-2 p-2 diabled:bg-black"
+          primary
         >
           Send
-        </button>
-        <button onClick={ping} className="rounded bg-white m-2 p-2">
+        </Button>
+        <Button onClick={ping}>
           Ping
-        </button>
+        </Button>
       </div>
     </div>
   );
